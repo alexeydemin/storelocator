@@ -1,0 +1,10 @@
+import:
+    title: Import stores
+    modelClass: ADemin\StoreLocator\Classes\StoreImport
+    list: $/ademin/storelocator/models/store/import_export_columns.yaml
+
+export:
+    title: Export stores
+    modelClass: ADemin\StoreLocator\Classes\StoreExport
+    list: $/ademin/storelocator/models/store/import_export_columns.yaml
+

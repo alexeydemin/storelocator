@@ -1,0 +1,17 @@
+columns:
+  name:
+    label: Name
+  address_1:
+    label: Address 1
+  address_2:
+    label: Address 2
+  city:
+    label: City
+  state:
+    label: State
+  zip:
+    label: Zip code
+  county:
+    label: Country
+  phone:
+    label: Phone

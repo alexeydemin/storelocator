@@ -1,0 +1,105 @@
+@font-face {
+    font-family: 'Aktiv Grotesk Bold';
+    src: url('../fonts/AktivGroteskBold/aktiv-grotesk-bold-webfont.woff2') format('woff2'),
+    url('../fonts/AktivGroteskBold/aktiv-grotesk-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body {
+    font-family: sans-serif;
+    color: #3a3c3d;
+}
+.location-map {
+    position: relative;
+}
+.location-map img {
+    display: block;
+}
+.location-map .location-detail {
+    position: absolute;
+    max-width: 330px;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+.location-map .location-detail h4 {
+    margin-bottom: 15px;
+}
+.location-map .location-detail .small {
+    margin-bottom: 20px;
+}
+.location-map .location-detail .location-detail-item {
+    padding: 20px 20px 40px;
+    width: 100%;
+}
+.location-map .location-detail .zip {
+    width: 145px;
+    -webkit-appearance: none;
+    -moz-appearance: textfield;
+}
+.location-map .location-detail .miles {
+    width: 190px;
+}
+
+h4 {
+    font-size: 26px;
+    line-height: 1.4;
+    font-family: 'Aktiv Grotesk Bold';
+    color: #fff;
+}
+a,
+button,
+select,
+input,
+textarea {
+    outline: none !important;
+}
+.border-top {
+    border-top: 1px solid #7d7777;
+}
+a,
+input[type='submit'],
+button {
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+}
+.form-wrap .three-cols {
+    margin-right: -20px;
+    margin-left: -20px;
+}
+.form-wrap .three-cols .col-item {
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.form-wrap input,
+.form-wrap select,
+.form-wrap textarea,
+.filter-drop select {
+    width: 100%;
+    height: 50px;
+    border: none;
+    border-radius: 4px;
+    font-size: 18px;
+    font-family: 'Aktiv Grotesk Bold';
+    padding: 0 20px;
+    color: #3a3c3d;
+}
+.red-bg {
+    background-color: #b84b9e;
+    color: #fff;
+}
+.grey-bg {
+    background-color: #ffcb00;
+    color: #fff;
+}
+.form-wrap select,
+.filter-drop select {
+    background: #f9f7f6 url('/plugins/ademin/storelocator/assets/images/select-bg.png') no-repeat 95% 50%;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+.form-wrap select::-ms-expand,
+.filter-drop select::-ms-expand {
+    display: none;
+}

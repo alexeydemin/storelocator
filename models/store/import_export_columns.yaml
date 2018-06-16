@@ -1,0 +1,25 @@
+columns:
+  id:
+    label: ID
+  name:
+    label: Store Name
+  address_1:
+    label: Address 1
+  address_2:
+    label: Address 2
+  city:
+    label: City
+  country:
+    label: Country
+  state:
+    label: State
+  zip:
+    label: Postal Code
+  phone:
+    label: Phone Number
+  hours:
+    label: Hours
+  website:
+    label: URL
+  description:
+    label: Description

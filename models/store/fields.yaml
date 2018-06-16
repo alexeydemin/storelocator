@@ -1,0 +1,50 @@
+fields:
+  name:
+    label: Name
+    required: true
+  address:
+    label: Address
+    type: addressfinder
+    countryRestriction: 'us,gb'
+    fieldMap:
+      latitude: lat
+      longitude: lng
+      street: address_1
+      city: city
+      zip: zip
+      country: country
+      state: state
+#      vicinity: vicinity
+  country:
+    label: Country
+  state:
+    label: State
+  lat:
+    label: Latitude
+    span: left
+  lng:
+   label: Longitude
+   span: right
+  address_1:
+    label: Address 1
+  address_2:
+    label: Address 2
+  city:
+    label: City
+  zip:
+    label: Zip Code
+  phone:
+    label: Phone
+  website:
+    label: Website
+    comment: A fully qualified URL with either https:// or https:// predicate
+  hours:
+    label: Hours
+    type: textarea
+    size: small
+  description:
+    label: Description
+    type: textarea
+    size: small
+
+
