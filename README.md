@@ -27,3 +27,5 @@ and add country codes for Address field auto-complete on backend (default `'us,g
 https://sites.google.com/a/chromium.org/dev/Home/chromium-security/deprecating-powerful-features-on-insecure-origins
 
 4. Add `[storeLocator]` to configuration section and `{% component 'storeLocator' %}` to Twig section of your page
+
+Feel free to contact me with any questions deminn@gmail.com
