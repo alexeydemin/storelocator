@@ -2,3 +2,4 @@
 1.0.2:
   - Initial Databases
   - create_stores_table.php
+1.0.3: Snippet added to work correctly with Static Pages

@@ -63,4 +63,11 @@ class Plugin extends PluginBase
             ]
         ];
     }
+
+    public function registerPageSnippets()
+    {
+        return [
+            '\ADemin\StoreLocator\Components\StoreLocator' => 'storelocator'
+        ];
+    }
 }
