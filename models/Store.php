@@ -41,12 +41,16 @@ class Store extends Model
     public $morphTo = [];
     public $morphOne = [];
     public $morphMany = [];
-    public $attachOne = [];
+    public $attachOne = [
+        'photo' => 'System\Models\File'
+    ];
     public $attachMany = [];
 
     public function scopeDistance($query, $lat, $long, $distance)
     {
-        return $query->having('distance', '<', $distance)
+        return $query
+            ->with('photo')
+            ->having('distance', '<', $distance)
             ->select(DB::raw(
                     "*, (3959 * ACOS(COS(RADIANS($lat))
                     * COS(RADIANS(lat))
@@ -60,7 +64,9 @@ class Store extends Model
 
     public function scopeWithinBounds($query, $a, $b, $c, $d)
     {
-        return $query->where(function ($q) use ($a, $c) {
+        return $query
+            ->with('photo')
+            ->where(function ($q) use ($a, $c) {
                 $q->whereRaw("$a < $c")->whereBetween('lat', [$a, $c])
                     ->orWhere(function ($q2) use ($a, $c) {
                         $q2->whereRaw("$a > $c")->whereBetween('lat', [$c, $a]);

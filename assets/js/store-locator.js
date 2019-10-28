@@ -334,22 +334,22 @@ const mapStyle = [
   }
 ];
 
-var map;
-var markers = [];
-var infoWindow;
-var locationList = '';
-var mapEl = document.getElementById("map");
-var zipEl = parent.document.getElementById("zip");
-var radiusEl = parent.document.getElementById('radius');
-var listEl = parent.document.getElementById('locations');
+let map;
+let markers = [];
+let infoWindow;
+let locationList = '';
+let mapEl = document.getElementById("map");
+let zipEl = parent.document.getElementById("zip");
+let radiusEl = parent.document.getElementById('radius');
+let listEl = parent.document.getElementById('locations');
 
 function initMap() {
   zipEl.focus();
-  var wakefieldOffice = {lat: 42.520226, lng: -71.047453};
+  let wakefieldOffice = {lat: 42.520226, lng: -71.047453};
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
+      let pos = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
       };
@@ -370,13 +370,13 @@ function initMap() {
   infoWindow = new google.maps.InfoWindow();
 
   map.addListener('idle', function() {
-      var boundsChange = true;
-      searchLocationsNear(map.getCenter(), boundsChange);
+    let boundsChange = true;
+    searchLocationsNear(map.getCenter(), boundsChange);
   });
 
   radiusEl.onchange = searchLocations;
   zipEl.oninput = function() {
-    if(zipEl.value.length == 5 && isNum(zipEl.value)) {
+    if(zipEl.value.length === 5 && isNum(zipEl.value)) {
       searchLocations();
     }
   };
@@ -389,11 +389,11 @@ function initMap() {
 }
 
 function searchLocations() {
-  var zip = zipEl.value;
-  var geocoder = new google.maps.Geocoder();
-  var country = isNum(zip) ? 'US' : 'UK';
+  let zip = zipEl.value;
+  let geocoder = new google.maps.Geocoder();
+  let country = isNum(zip) ? 'US' : 'UK';
   geocoder.geocode({address: zip, country:  country}, function(results, status) {
-    if (status == google.maps.GeocoderStatus.OK) {
+    if (status === google.maps.GeocoderStatus.OK) {
       searchLocationsNear(results[0].geometry.location);
     } else {
       console.log('Address not found');
@@ -407,7 +407,7 @@ function isNum($val){
 
 function clearLocations() {
   infoWindow.close();
-  for (var i = 0; i < markers.length; i++) {
+  for (let i = 0; i < markers.length; i++) {
     markers[i].setMap(null);
   }
   markers.length = 0;
@@ -416,54 +416,63 @@ function clearLocations() {
 
 function searchLocationsNear(center, boundsChange = false) {
 
-  var radius = radiusEl.value;
-  var searchUrl = '/api/stores.json';
+  let radius = radiusEl.value;
+  let searchUrl = '/api/stores.json';
 
   if(! boundsChange) {
     clearLocations();
     searchUrl += '?lat=' + center.lat() + '&lng=' + center.lng() + '&radius=' + radius;
   } else {
-    var bounds = map.getBounds();
-    var sw = bounds.getSouthWest();
-    var ne = bounds.getNorthEast();
+    let bounds = map.getBounds();
+    let sw = bounds.getSouthWest();
+    let ne = bounds.getNorthEast();
     searchUrl += '?a=' + sw.lat() + '&b=' + sw.lng() + '&c=' + ne.lat() + '&d=' + ne.lng();
   }
 
   downloadUrl(searchUrl, function(data) {
-    var markerNodes = JSON.parse(data);
-    var bounds = new google.maps.LatLngBounds();
-    var locationList = [];
-    for (m of markerNodes) {
-      var latlng = new google.maps.LatLng(parseFloat(m.lat), parseFloat(m.lng));
-      createMarker(latlng, m.name, m.address, m.phone);
-      bounds.extend(latlng);
+    let markerNodes = JSON.parse(data);
+    let bounds = new google.maps.LatLngBounds();
+    let locationList = [];
+    for (let m of markerNodes) {
+      let latLng = new google.maps.LatLng(parseFloat(m.lat), parseFloat(m.lng));
+      createMarker(latLng, m);
+      bounds.extend(latLng);
       locationList.push(m);
     }
     if(! boundsChange) {
       map.fitBounds(bounds);
     }
-  var htmlList = '';
-  for(m of locationList) {
-    htmlList += '<div class="col-item">' +
-    '<h4 class="detail-headline">' + m.name + '</h4>' +
-    '<p>' +
-    m.address_1 + '<br>' +
-    m.address_2 + '<br>' +
-    m.city + ', ' + m.state + ', ' + m.zip + '<br>' +
-    m.phone + '<br>' +
-    (m.website ? ('<a href="' + m.website + '">' + m.website + '</a>') : '') + '<br>' +
-    m.hours +
-    '</p>' +
-    '</div>';
-  }
-
-  listEl.innerHTML = htmlList;
+    let htmlList = '';
+    for(let m of locationList) {
+      htmlList += '<div class="col-item">' +
+          '<h4 class="detail-headline">' + m.name + '</h4>' +
+          '<p>' +
+          m.address_1 + '<br>' +
+          m.address_2 + '<br>' +
+          m.city + ', ' + m.state + ', ' + m.zip + '<br>' +
+          m.phone + '<br>' +
+          (m.website ? ('<a href="' + m.website + '">' + m.website + '</a>') : '') + '<br>' +
+          m.hours +
+          '</p>' +
+          '</div>';
+    }
+    listEl.innerHTML = htmlList;
   });
 }
 
-function createMarker(latlng, name, address, phone) {
-  var html = '<b>' + name + '</b><br>' + address + '<br>' + phone;
-  var marker = new google.maps.Marker({
+function createMarker(latlng, markerData) {
+  let html = '<b>' + markerData.name + '</b><br>'
+      + markerData.address + '<br>'
+      + markerData.phone + '<br>'
+      + '<a href="'+ markerData.website +'"></a>' + '<br>'
+      + nl2br(markerData.hours) + '<br>'
+      + nl2br(markerData.description) + '<br>'
+      + (markerData.photo
+              ? '<img width="150px" src="'+ markerData.photo.path + '" alt="' + markerData.name + '">'
+              : '')
+  ;
+
+  let marker = new google.maps.Marker({
     map: map,
     position: latlng,
     icon: '/plugins/ademin/storelocator/assets/images/icon-marker.png',
@@ -476,12 +485,12 @@ function createMarker(latlng, name, address, phone) {
 }
 
 function downloadUrl(url, callback) {
-  var request = window.ActiveXObject ?
-    new ActiveXObject('Microsoft.XMLHTTP') :
-    new XMLHttpRequest;
+  let request = window.ActiveXObject ?
+      new ActiveXObject('Microsoft.XMLHTTP') :
+      new XMLHttpRequest;
 
   request.onreadystatechange = function() {
-    if (request.readyState == 4) {
+    if (request.readyState === 4) {
       request.onreadystatechange = doNothing;
       callback(request.responseText, request.status);
     }
@@ -493,7 +502,7 @@ function downloadUrl(url, callback) {
 
 function parseXml(str) {
   if (window.ActiveXObject) {
-    var doc = new ActiveXObject('Microsoft.XMLDOM');
+    let doc = new ActiveXObject('Microsoft.XMLDOM');
     doc.loadXML(str);
     return doc;
   } else if (window.DOMParser) {
@@ -506,7 +515,15 @@ function doNothing() {}
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   infoWindow.setPosition(pos);
   infoWindow.setContent(browserHasGeolocation ?
-    'Error: The Geolocation service failed.' :
-    'Error: Your browser doesn\'t support geolocation.');
+      'Error: The Geolocation service failed.' :
+      'Error: Your browser doesn\'t support geolocation.');
   infoWindow.open(map);
+}
+
+function nl2br(str, is_xhtml) {
+  if (typeof str === 'undefined' || str === null) {
+    return '';
+  }
+  let breakTag = (is_xhtml || typeof is_xhtml === 'undefined') ? '<br />' : '<br>';
+  return (str + '').replace(/([^>\r\n]?)(\r\n|\n\r|\r|\n)/g, '$1' + breakTag + '$2');
 }

@@ -46,5 +46,9 @@ fields:
     label: Description
     type: textarea
     size: small
+  photo:
+    label: Photo
+    type: fileupload
+    mode: image
 
 
