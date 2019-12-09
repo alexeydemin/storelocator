@@ -2,7 +2,7 @@
 
 namespace ADemin\StoreLocator\Classes;
 
-use Illuminate\Support\Facades\Config;
+use ADemin\StoreLocator\Models\Settings;
 
 class GeoCoder
 {
@@ -14,7 +14,7 @@ class GeoCoder
 
     public function __construct($addressParts)
     {
-        $this->apiKey = Config::get('ademin.storelocator::googleMapsKey');
+        $this->apiKey = Settings::get('api_key');
         $this->buildAddress($addressParts);
         $this->geocode();
     }

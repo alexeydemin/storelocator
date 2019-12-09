@@ -12,12 +12,7 @@ __Premium features__:
 
 
 # Installation
-1. Copy `plugins/ademin/storelocator/config/config.php` to `config/ademin/storelocator/config.php`
-and add your Google Maps API Key (see https://developers.google.com/maps/documentation/javascript/get-api-key)
-    ```
-    mkdir -p config/ademin/storelocator
-    cp plugins/ademin/storelocator/config/config.php config/ademin/storelocator/config.php
-    ```
+1. Go to Settings > Plugins > StoreLocator and add your Google Maps API Key. 
 
 2. If you wish to add stores in specific countries only you might want to edit 
 `plugins/ademin/storelocator/models/store/fields.yaml`->address->countryRestriction

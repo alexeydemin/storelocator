@@ -70,4 +70,20 @@ class Plugin extends PluginBase
             '\ADemin\StoreLocator\Components\StoreLocator' => 'storelocator'
         ];
     }
+
+    public function registerSettings()
+    {
+        return [
+            'storelocator' => [
+                'label'       => 'StoreLocator',
+                'description' => 'Manage StoreLocator plugin settings',
+                'category'    => 'Plugins',
+                'icon'        => 'icon-globe',
+                //'url'         => Backend::url('ademin/storelocator/settings'),
+                'class'       => 'ADemin\StoreLocator\Models\Settings',
+                'order'       => 500,
+                'keywords'    => 'store location map'
+            ]
+        ];
+    }
 }

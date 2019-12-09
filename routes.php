@@ -2,8 +2,8 @@
 
 namespace ADemin\StoreLocator;
 
+use ADemin\StoreLocator\Models\Settings;
 use ADemin\StoreLocator\Models\Store;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/api/stores.json', function () {
@@ -14,6 +14,6 @@ Route::get('/api/stores.json', function () {
 
 Route::get('/map', function () {
     $html = file_get_contents('plugins/ademin/storelocator/components/storelocator/map.htm');
-    $apiKey = Config::get('ademin.storelocator::googleMapsKey');
+    $apiKey = Settings::get('api_key');
     return str_replace('%api_key%', $apiKey, $html) ;
 });

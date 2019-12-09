@@ -1,0 +1,8 @@
+tabs:
+  fields:
+    api_key:
+      label: Google Maps API Key
+      tab: Settings
+      required: true
+      commentHtml: true
+      comment: 'Get your <a target="_blank" href="https://developers.google.com/maps/documentation/javascript/get-api-key">Google Maps API Key</a>'

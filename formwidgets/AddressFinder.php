@@ -1,8 +1,8 @@
 <?php namespace ADemin\StoreLocator\FormWidgets;
 
+use ADemin\StoreLocator\Models\Settings;
 use Html;
 use Backend\Classes\FormWidgetBase;
-use Illuminate\Support\Facades\Config;
 
 /**
  * Address finder
@@ -89,7 +89,7 @@ class AddressFinder extends FormWidgetBase
      */
     public function loadAssets()
     {
-        $apiKey = Config::get('ademin.storelocator::googleMapsKey');
+        $apiKey = Settings::get('api_key');
         $this->addJs('//maps.googleapis.com/maps/api/js?libraries=places&key='.$apiKey);
         $this->addJs('js/location-autocomplete.js', 'core');
     }

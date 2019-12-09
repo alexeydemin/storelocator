@@ -3,3 +3,6 @@
   - Initial Databases
   - create_stores_table.php
 1.0.3: Snippet added to work correctly with Static Pages
+1.0.4:
+  - Move settings to database
+  - seed_settings_table.php
