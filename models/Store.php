@@ -66,18 +66,6 @@ class Store extends Model
     {
         return $query
             ->with('photo')
-            ->where(function ($q) use ($a, $c) {
-                $q->whereRaw("$a < $c")->whereBetween('lat', [$a, $c])
-                    ->orWhere(function ($q2) use ($a, $c) {
-                        $q2->whereRaw("$a > $c")->whereBetween('lat', [$c, $a]);
-                    });
-        })
-            ->where(function ($q) use ($b, $d) {
-                $q->whereRaw("$b < $d")->whereBetween('lng', [$b, $d])
-                    ->orWhere(function ($q2) use ($b, $d) {
-                        $q2->whereRaw("$b > $d")->whereBetween('lat', [$d, $b]);
-                    });
-            })
             ->get();
     }
 }
