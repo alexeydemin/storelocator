@@ -6,3 +6,6 @@
 1.0.4:
   - Move settings to database
   - seed_settings_table.php
+1.0.5:
+  - Lat and lng column types changes
+  - update_stores_change_lat_lng.php
