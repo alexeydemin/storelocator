@@ -58,8 +58,7 @@ class Store extends Model
                     + SIN(RADIANS($lat))
                     * SIN(RADIANS(lat)))) AS distance"
                 )
-            )->orderBy('distance', 'asc')
-            ->get();
+            )->orderBy('distance', 'asc');
     }
 
     public function scopeWithinBounds($query, $a, $b, $c, $d)
@@ -67,7 +66,11 @@ class Store extends Model
         return $query
             ->with('photo')
             ->whereBetween('lat', [min($a, $c), max($a, $c)])
-            ->whereBetween('lng', [min($b, $d), max($b, $d)])
-            ->get();
+            ->whereBetween('lng', [min($b, $d), max($b, $d)]);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_enabled', true);
     }
 }

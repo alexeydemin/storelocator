@@ -1,4 +1,7 @@
 columns:
+  is_enabled:
+    label: Is enabled
+    type: switch
   name:
     label: Name
   address_1:

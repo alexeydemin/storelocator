@@ -8,8 +8,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/api/stores.json', function () {
     return get('lat')
-        ? Store::distance(get('lat'), get('lng'), get('radius'))
-        : Store::withinBounds( get('a'), get('b'), get('c'), get('d') );
+        ? Store::active()->distance(get('lat'), get('lng'), get('radius'))->get()
+        : Store::active()->withinBounds( get('a'), get('b'), get('c'), get('d'))->get();
 });
 
 Route::get('/map', function () {
